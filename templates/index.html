@@ -245,6 +245,134 @@
         .form-group input, .form-group textarea { 
             width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-family: inherit;
         }
+/* --- تنسيق قسم قالوا عنا وقيمنا --- */
+.testimonials-section {
+    background-color: #f8fbfd; /* خلفية زرقاء ناعمة جداً تكسر بياض الصفحة */
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid #eef4f8;
+    border-bottom: 1px solid #eef4f8;
+    margin-bottom: 10px; /* تقليل المسافة تحت القسم لرفع جملة تواصل معنا */
+}
+
+.section-title {
+    color: #003366; /* الكحلي الفخم */
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.reviews-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+}
+
+.review-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    width: 280px;
+    text-align: right;
+    border-right: 4px solid #0056b3; /* خط أزرق جانبي أنيق */
+    transition: transform 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+.review-text {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.review-author {
+    color: #003366;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* نموذج كتابة رأي جديد */
+.add-review-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.btn-submit-review {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.btn-submit-review:hover {
+    background-color: #003366;
+}
+
+/* --- إلغاء الفراغ الكبير فوق وتحت جملة يسعنا تواصلك معنا --- */
+<!-- قسم قالوا عنا المطور والتفاعلي -->
+<section class="testimonials-section">
+    <h2 class="section-title">قالوا عن معرض العقيق للسيارات ⭐</h2>
+    
+    <!-- الآراء الحالية المكتوبة مسبقاً لتعطي ثقة للموقع -->
+    <div class="reviews-grid" id="reviewsContainer">
+        <div class="review-card">
+            <p class="review-text">"تعامل راقي جداً ومصداقية في فحص السيارات وسرعة في إنهاء الإجراءات. أنصح بالتعامل معهم بشدة."</p>
+            <h4 class="review-author">- أبو أحمد الفاضل</h4>
+        </div>
+        <div class="review-card">
+            <p class="review-text">"ما شاء الله تبارك الله، أسعارهم ممتازة والسيارات نظيفة جداً كأنها جديدة. شكراً لكم على حسن الاستقبال."</p>
+            <h4 class="review-author">- الأستاذ خالد محمد</h4>
+        </div>
+    </div>
+
+    <!-- نموذج تفاعلي حي يتيح للزوار كتابة آرائهم فوراً -->
+    <div class="add-review-form">
+        <h4 style="margin-top:0; color:#003366;">شاركنا رأيك في المعرض</h4>
+        <form id="reviewForm" onsubmit="submitUserReview(event)">
+            <div class="form-group">
+                <input type="text" id="reviewerName" class="form-control" placeholder="اسمك الكريم" required>
+            </div>
+            <div class="form-group">
+                <textarea id="reviewerText" class="form-control" rows="3" placeholder="اكتب تجربتك أو رأيك هنا..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit-review">إرسال رأيك مجاناً</button>
+        </form>
+    </div>
+</section>
+        
+.contact-section, #contact, footer {
+    margin-top: 5px !important; 
+    padding-top: 10px !important;
+}
+        
     </style>
 </head>
 <body>
@@ -455,6 +583,35 @@
     </script>
     <!-- الأزرار العائمة العمودية على يسار الشاشة -->
 <!-- سيظهر الكود هنا بالضبط فوق وسم الإغلاق -->
+<script>
+function submitUserReview(event) {
+    event.preventDefault(); // منع الصفحة من إعادة التحميل
+    
+    // جلب القيم المكتوبة
+    const name = document.getElementById('reviewerName').value;
+    const text = document.getElementById('reviewerText').value;
+    
+    if (name && text) {
+        // إنشاء كرت مراجعة جديد وتزيينه
+        const container = document.getElementById('reviewsContainer');
+        const newCard = document.createElement('div');
+        newCard.className = 'review-card';
+        newCard.style.animation = 'fadeIn 0.5s ease';
+        newCard.innerHTML = `
+            <p class="review-text">"${text}"</p>
+            <h4 class="review-author">- ${name}</h4>
+        `;
+        
+        // إضافة الكرت الجديد إلى القائمة فوراً أمام العميل
+        container.appendChild(newCard);
+        
+        // تفريغ الحقول للكتابة مرة أخرى
+        document.getElementById('reviewForm').reset();
+        alert('شكراً لك على مشاركة رأيك المتميز معنا!');
+    }
+}
+</script>
+    
     <div class="floating-contact">
         <a href="https://wa.me/966505306600" class="floating-btn whatsapp" target="_blank" title="تواصل واتساب">💬</a>
         <a href="tel:+966505306600" class="floating-btn phone" title="اتصل بنا">📞</a>
