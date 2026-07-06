@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض العقيق للسيارات الجديدة والمستعملة</title>
+    <style>
+        /* إعدادات الألوان والخطوط الأساسية والهوية البصرية */
+        :root {
+            --primary-blue: #004080;
+            --secondary-blue: #0066cc;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-dark: #333333;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background-color: var(--light-bg); 
+            color: var(--text-dark); 
+            overflow-x: hidden;
+        }
+
+        /* تصميم الرأس (Header) */
+        header { 
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); 
+            color: var(--white); 
+            padding: 40px 20px; 
+            text-align: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        header h1 { margin: 0; font-size: 2.6em; font-weight: bold; }
+        header p { margin-top: 12px; font-size: 1.2em; opacity: 0.9; }
+
+        /* --- تصميم مستعرض السيارات الهندسي المصحح --- */
+        .slider-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            position: relative;
+            padding: 0 60px; 
+            box-sizing: border-box;
+        }
+
+        .slider-viewport {
+            overflow: hidden; 
+            width: 100%;
+            direction: ltr; 
+        }
+
+        .slider-wrapper {
+            display: flex; 
+            transition: transform 0.5s ease-in-out; 
+            width: 100%;
+        }
+
+        .car-card { 
+            flex: 0 0 100%; 
+            max-width: 100%;
+            background: var(--white); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); 
+            text-align: right;
+            box-sizing: border-box;
+            direction: rtl; 
+            margin: 0;
+            transition: transform 0.3s ease;
+        }
+        .car-card:hover { transform: translateY(-5px); }
+
+        /* التنسيق للشاشات الكبيرة */
+        @media (min-width: 768px) {
+            .car-card { 
+                flex: 0 0 calc(33.333% - 20px); 
+                max-width: calc(33.333% - 20px); 
+                margin: 0 10px; 
+            }
+        }
+
+        .car-card img { width: 100%; height: 240px; object-fit: cover; border-bottom: 4px solid var(--primary-blue); background-color: #eaeaea; }
+        .car-info { padding: 20px; }
+        .car-info h3 { margin: 0 0 8px 0; color: var(--primary-blue); font-size: 1.3em; }
+        .badge { display: inline-block; padding: 4px 10px; background: #e1f0ff; color: var(--primary-blue); border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-bottom: 10px; }
+        .car-info p { margin: 5px 0; font-size: 0.95em; color: #666; line-height: 1.5; }
+
+        /* أزرار الأسهم يمين ويسار */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease, transform 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .slider-btn:hover { background-color: var(--secondary-blue); }
+        .slider-btn:active { transform: translateY(-50%) scale(0.95); }
+        .prev-btn { right: 5px; } 
+        .next-btn { left: 5px; }  
+
+        /* نقاط المؤشر السفلي */
+        .slider-dots { text-align: center; margin-top: 25px; }
+        .dot { display: inline-block; width: 10px; height: 10px; background-color: #ccc; border-radius: 50%; margin: 0 6px; cursor: pointer; transition: background 0.3s, width 0.3s; }
+        .dot.active { background-color: var(--primary-blue); width: 22px; border-radius: 10px; }
+
+        /* قسم التواصل */
+        .actions-section { 
+            text-align: center; 
+            padding: 50px 20px; 
+            background-color: var(--white); 
+            border-top: 2px solid #eaeaea;
+        }
+        .btn { 
+            padding: 14px 28px; 
+            margin: 10px; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            font-weight: bold; 
+            transition: background 0.3s;
+            font-family: inherit;
+        }
+        .btn-whatsapp { background-color: #25D366; color: white; }
+        .btn-whatsapp:hover { background-color: #1ebe57; }
+        .btn-call { background-color: #34b7f1; color: white; }
+        .btn-call:hover { background-color: #2aa2d6; }
+        .btn-email { background-color: #ea4335; color: white; }
+        .btn-email:hover { background-color: #d33828; }
+        .btn-quote { background-color: var(--primary-blue); color: white; }
+        .btn-quote:hover { background-color: var(--secondary-blue); }
+
+        /* نافذة طلب السعر المنبثقة (Modal) */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.6); 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000;
+        }
+        .modal-content { 
+            background: var(--white); 
+            padding: 40px; 
+            border-radius: 12px; 
+            width: 90%; 
+            max-width: 450px; 
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .close-btn { position: absolute; top: 15px; left: 20px; cursor: pointer; font-size: 28px; color: #888; }
+        .close-btn:hover { color: #333; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group textarea { 
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الجزء العلوي: اسم المعرض -->
+    <header>
+        <h1>معرض العقيق للسيارات الجديدة والمستعملة</h1>
+        <p>التميز والفخامة في اختيار سيارتك القادمة موديل 2026</p>
+    </header>
+
+    <!-- مستعرض السيارات بمسارات بايثون Flask الرسمية الآمنة -->
+    <main class="slider-container">
+        <button class="slider-btn prev-btn" id="prevBtn">&#10095;</button> 
+        <button class="slider-btn next-btn" id="nextBtn">&#10094;</button> 
+
+        <div class="slider-viewport">
+            <div class="slider-wrapper" id="sliderWrapper">
+                
+                <!-- سيارة 1: تويوتا كامري الرياضية -->
+                <div class="car-card">
+                    <img src="{{ url_for('static', filename='images/camry.jpg') }}" alt="تويوتا كامري 2026 الرياضية">
+                    <div class="car-info">
+                        <span class="badge">جديد</span>
+                        <h3>تويوتا كامري XSE 2026</h3>
+                        <p>الموديل: 2026 | سقف بانوراما أسود</p>
+                        <p>الإصدار الرياضي الفاخر بلون فضي مميز وإضاءة خلفية متصلة تعكس مفهوم الفخامة العصرية.</p>
+                    </div>
+                </div>
+
+                <!-- سيارة 2: مازدا 6 -->
+                <div class="car-card">
+                    <img src="{{ url_for('static', filename='images/mazda.jpg') }}" alt="مازدا 6 2026">
+                    <div class="car-info">
+                        <span class="badge" style="background:#fff3cd; color:#856404;">مستعمل شبه جديد</span>
+                        <h3>مازدا 6 سبورت 2026</h3>
+                        <p>الموديل: 2026 | اللون الأبيض اللؤلؤي</p>
+                        <p>انسيابية التصميم الياباني الفريد مع مقصورة مريحة وأداء عالي الثبات على الطرقات بحالة الوكالة.</p>
+                    </div>
+                </div>
+
+                <!-- سيارة 3: فورد توروس -->
+                <div class="car-card">
+                    <img src="{{ url_for('static', filename='images/fordtors2026.jpg') }}" alt="فورد توروس 2026">
+                    <div class="car-info">
+                        <span class="badge">جديد</span>
+                        <h3>فورد توروس تيتانيوم 2026</h3>
+                        <p>الموديل: 2026 | محرك EcoBoost</p>
+                        <p>السيارة العائلية والشبابية المفضلة؛ تجمع بين الواجهة الأمامية الهجومية والتقنيات الذكية المتكاملة.</p>
+                    </div>
+                </div>
+
+                <!-- سيارة 4: تويوتا لاندكروزر -->
+                <div class="car-card">
+                    <img src="{{ url_for('static', filename='images/landcrozer2026.jpg') }}" alt="تويوتا لاندكروزر 2026">
+                    <div class="car-info">
+                        <span class="badge">جديد</span>
+                        <h3>تويوتا لاندكروزر VXR 2026</h3>
+                        <p>الموديل: 2026 | مفخرة الأرض</p>
+                        <p>الهيبة والقدرة المطلقة على قهر الطرق الوعرة مع مقاعد جلدية فاخرة وأنظمة القيادة الذكية الأحدث.</p>
+                    </div>
+                </div>
+
+                <!-- سيارة 5: تويوتا كامري GLE بيضاء -->
+                <div class="car-card">
+                    <img src="{{ url_for('static', filename='images/camryy.jpg') }}" alt="تويوتا كامري 2026 بيضاء">
+                    <div class="car-info">
+                        <span class="badge">جديد</span>
+                        <h3>تويوتا كامري GLE 2026</h3>
+                        <p>الموديل: 2026 | هجينة (Hybrid)</p>
+                        <p>اللون الأبيض الكلاسيكي النقي مع أعلى معدل توفير للوقود، خيارك الاعتمادي الأمثل يومياً.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- نقاط التنقل السفلية -->
+        <div class="slider-dots" id="sliderDots"></div>
+    </main>
+
+    <!-- قسم أزرار التواصل السريع -->
+    <section class="actions-section">
+        <h2 style="color: var(--primary-blue); margin-bottom: 30px; font-size: 2em;">يسعدنا تواصلك معنا</h2>
+        <a href="https://wa.me/966562664477" target="_blank" class="btn btn-whatsapp">📱 محادثة واتساب</a>
+        <a href="tel:0562664477" class="btn btn-call">📞 اتصال مباشر</a>
+        <a href="mailto:wwessamm7@gmail.com" class="btn btn-email">✉️ إرسال بريد إلكتروني</a>
+        <button onclick="openQuoteModal()" class="btn btn-quote">📝 طلب عرض سعر</button>
+    </section>
+
+    <!-- نافذة طلب السعر المنبثقة (Modal) -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeQuoteModal()">&times;</span>
+            <h2 style="color: var(--primary-blue); margin-top: 0;">طلب عرض سعر مالي</h2>
+            <form id="quoteForm" onsubmit="submitQuoteForm(event)">
+                <div class="form-group">
+                    <label for="clientName">الاسم الكريم:</label>
+                    <input type="text" id="clientName" required placeholder="أدخل اسمك الكامل">
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone">رقم الجوال:</label>
+                    <input type="tel" id="clientPhone" required placeholder="05XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="carRequested">السيارة المطلوبة:</label>
+                    <input type="text" id="carRequested" required placeholder="مثال: تويوتا كامري 2026">
+                </div>
+                <div class="form-group">
+                    <label for="clientNotes">تفاصيل إضافية:</label>
+                    <textarea id="clientNotes" rows="3" placeholder="حدد طريقة الشراء (كاش أو أقساط) أو أي مواصفات خاصة"></textarea>
+                </div>
+                <button type="submit" class="btn btn-quote" style="width: 100%; margin: 10px 0 0 0;">إرسال طلب السعر</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- برمجة حركة المستعرض والتفاعل -->
+    <script>
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const carCards = document.querySelectorAll('.car-card');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const sliderDots = document.getElementById('sliderDots');
+
+        let currentIndex = 0;
+        const totalCards = carCards.length;
+
+        function getItemsPerView() {
+            return window.innerWidth >= 768 ? 3 : 1;
+        }
+
+        function showSlide(index) {
+            const itemsPerView = getItemsPerView();
+            const maxIndex = totalCards - itemsPerView;
+
+            if (index < 0) {
+                currentIndex = maxIndex;
+            } else if (index > maxIndex) {
+                currentIndex = 0;
+            } else {
+                currentIndex = index;
+            }
+
+            const stepWidth = 100 / itemsPerView;
+            const displacement = currentIndex * stepWidth;
+            sliderWrapper.style.transform = `translateX(-${displacement}%)`;
+
+            updateDots(maxIndex + 1);
+        }
+
+        function updateDots(visibleScreens) {
+            sliderDots.innerHTML = '';
+            for (let i = 0; i < visibleScreens; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => showSlide(i));
+                sliderDots.appendChild(dot);
+            }
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+        nextBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+
+        window.addEventListener('resize', () => showSlide(currentIndex));
+
+        showSlide(currentIndex);
+
+        function openQuoteModal() {
+            document.getElementById('quoteModal').style.display = 'flex';
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').style.display = 'none';
+        }
+
+        async function submitQuoteForm(event) {
+            event.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                car: document.getElementById('carRequested').value,
+                notes: document.getElementById('clientNotes').value
+            };
+
+            try {
+                const response = await fetch('/request-quote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                alert(result.message);
+                
+                closeQuoteModal();
+                document.getElementById('quoteForm').reset();
+            } catch (error) {
+                alert('عذراً، حدث خطأ أثناء إرسال الطلب، يرجى المحاولة لاحقاً.');
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('quoteModal');
+            if (event.target == modal) closeQuoteModal();
+        }
+    </script>
+</body>
+</html>
