@@ -5,6 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض العقيق للسيارات الجديدة والمستعملة</title>
     <style>
+/* --- كود الأزرار العائمة الحيوية والجذابة --- */
+.floating-contact {
+    position: fixed;
+    left: 20px; /* المسافة من يسار الشاشة */
+    top: 50%; /* موازنة الأزرار في منتصف الارتفاع */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column; /* ترتيب الأزرار عمودياً */
+    gap: 15px; /* المسافة بين زر الواتساب وزر الاتصال */
+    z-index: 1000; /* ضمان ظهورها فوق محتوى الموقع */
+}
+
+.floating-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* جعل الأزرار دائرية بالكامل */
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease; /* سرعة ونعومة الحركة */
+    position: relative;
+}
+
+/* التأثير الحركي الجذاب عند مرور الماوس (Hover) */
+.floating-btn:hover {
+    transform: scale(1.1) translateX(3px); /* تكبير الزر قليلاً وتحريكه بنعومة */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* خلفية متدرجة فخمة لزر الواتساب */
+.whatsapp {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+}
+
+/* خلفية متدرجة زرقاء احترافية لزر الاتصال */
+.phone {
+    background: linear-gradient(135deg, #0056b3, #003366);
+}
+
+/* تأثير التوهج المتموج خلف الأزرار لجذب الانتباه */
+.floating-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.5;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.floating-btn:hover::after {
+    transform: scale(1.3); /* تمدد التوهج للخارج عند لمس الزر */
+    opacity: 0;
+}
+
+/* تحسين المقاسات لتناسب شاشات الجوال الصغير */
+@media (max-width: 768px) {
+    .floating-contact {
+        left: 15px;
+    }
+    .floating-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+
+        
         /* إعدادات الألوان والخطوط الأساسية والهوية البصرية */
         :root {
             --primary-blue: #004080;
