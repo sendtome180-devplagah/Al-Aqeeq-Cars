@@ -511,25 +511,40 @@ function submitUserReview(event) {
     const name = document.getElementById('reviewerName').value;
     const text = document.getElementById('reviewerText').value;
     
+    function submitUserReview(event) {
+    event.preventDefault(); // منع الصفحة من إعادة التحميل
+    
+    // جلب العناصر من الصفحة
+    const nameInput = document.getElementById('reviewerName');
+    const textInput = document.getElementById('reviewerText');
+    const container = document.getElementById('reviewsContainer');
+    const form = document.getElementById('reviewForm');
+    
+    // فحص ذكي: إذا كانت عناصر الـ HTML غير موجودة أو أسمائها مختلفة سيعطيك تنبيهاً فورياً
+    if (!container || !form || !nameInput || !textInput) {
+        alert('تنبيه تقني: كود الـ HTML الخاص بقسم قالوا عنا لم يوضع في المكان الصحيح أو هناك نقص في الأسماء، يرجى مراجعته!');
+        return;
+    }
+    
+    const name = nameInput.value;
+    const text = textInput.value;
+    
     if (name && text) {
-        // إنشاء كرت مراجعة جديد وتزيينه
-        const container = document.getElementById('reviewsContainer');
+        // إنشاء كرت مراجعة جديد
         const newCard = document.createElement('div');
         newCard.className = 'review-card';
-        newCard.style.animation = 'fadeIn 0.5s ease';
         newCard.innerHTML = `
             <p class="review-text">"${text}"</p>
             <h4 class="review-author">- ${name}</h4>
         `;
         
-        // إضافة الكرت الجديد إلى القائمة فوراً أمام العميل
+        // إضافة الكرت الجديد إلى القائمة فوراً
         container.appendChild(newCard);
         
-    // تفريغ الحقول للكتابة مرة أخرى
-        document.getElementById('reviewForm').reset();
+        // تفريغ الحقول للكتابة مرة أخرى
+        form.reset();
         alert('شكراً لك على مشاركة رأيك المتميز معنا!');
     }
 }
-</script>
 </body>
 </html>
