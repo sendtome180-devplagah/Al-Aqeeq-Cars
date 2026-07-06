@@ -20,6 +20,18 @@
             background-color: var(--light-bg); 
             color: var(--text-dark); 
             overflow-x: hidden;
+<!-- الأزرار العائمة العمودية على يسار الشاشة -->
+<div class="vertical-floating-menu">
+    <!-- زر الواتساب النشط -->
+    <a href="https://wa.me/966505306600" class="v-float-btn whatsapp-btn" target="_blank" title="تواصل عبر الواتساب">
+        💬
+    </a>
+    <!-- زر الاتصال المباشر -->
+    <a href="tel:+966505306600" class="v-float-btn phone-btn" title="اتصل بنا الآن">
+        📞
+    </a>
+</div>
+            
         }
 
         /* تصميم الرأس (Header) */
@@ -168,7 +180,68 @@
         .form-group input, .form-group textarea { 
             width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-family: inherit;
         }
-    </style>
+    </style> 
+/* تنسيق الحاوية الرئيسية للأزرار العائمة */
+.vertical-floating-menu {
+    position: fixed;
+    left: 25px; /* تثبيت القائمة على يسار الشاشة */
+    top: 50%; /* موازنة القائمة في منتصف الارتفاع */
+    transform: translateY(-50%); /* ضبط السنتر بدقة */
+    display: flex;
+    flex-direction: column; /* ترتيب الأزرار بشكل رأسي عمودي */
+    gap: 15px; /* المسافة بين الزر والآخر */
+    z-index: 9999; /* ضمان ظهورها فوق جميع عناصر الموقع */
+}
+
+/* التنسيق المشترك للأزرار */
+.v-float-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; /* جعل الزر دائرياً بالكامل */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* ظلال ناعمة */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+/* حركة حيوية عند تمرير الماوس فوق الزر */
+.v-float-btn:hover {
+    transform: scale(1.12) translateY(-3px); /* تكبير الزر قليلاً ورفعه للأعلى */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.35); /* تعميق الظل لإعطاء إيحاء بالارتفاع */
+}
+
+/* لون زر الواتساب */
+.whatsapp-btn {
+    background-color: #25D366;
+}
+.whatsapp-btn:hover {
+    background-color: #20ba5a;
+}
+
+/* لون زر الاتصال متناسق مع الهوية الزرقاء الاحترافية */
+.phone-btn {
+    background-color: #0056b3; 
+}
+.phone-btn:hover {
+    background-color: #004085;
+}
+
+/* تحسين المظهر على الشاشات الصغيرة (الجوالات) */
+@media (max-width: 768px) {
+    .vertical-floating-menu {
+        left: 15px; /* تقريب الأزرار من الحافة في الجوال لتوفير مساحة */
+    }
+    .v-float-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+}
+
 </head>
 <body>
 
