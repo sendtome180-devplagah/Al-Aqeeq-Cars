@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض العقيق للسيارات الجديدة والمستعملة</title>
-    <!-- استدعاء خط Cairo الاحترافي للمواقع الفاخرة -->
+    <!-- text استدعاء خط Cairo الاحترافي للمواقع الفاخرة -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -14,13 +14,13 @@
         :root {
             --primary-blue: #004080;
             --secondary-blue: #0066cc;
-            --light-bg: #f8fafc; /* خلفية ناعمة وحديثة */
+            --light-bg: #f8fafc; 
             --white: #ffffff;
             --text-dark: #1e293b;
             --text-muted: #64748b;
-            --radius-lg: 16px; /* زوايا منحنية أكثر فخامة */
+            --radius-lg: 16px; 
             --radius-md: 12px;
-            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* حركة ناعمة جداً */
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
         }
         
         body { 
@@ -56,7 +56,7 @@
             overflow: hidden; 
             width: 100%;
             direction: ltr; 
-            padding: 15px 0; /* مساحة علوية وسفلية لراحة الظلال عند الارتفاع */
+            padding: 15px 0; 
         }
 
         .slider-wrapper {
@@ -80,7 +80,6 @@
             border: 1px solid rgba(0, 64, 128, 0.03);
         }
         
-        /* تأثير المرور الاحترافي */
         .car-card:hover { 
             transform: translateY(-8px) scale(1.01); 
             box-shadow: 0 20px 40px rgba(0, 64, 128, 0.1);
@@ -165,6 +164,7 @@
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .btn-whatsapp { background-color: #25D366; color: white; }
         .btn-call { background-color: #0284c7; color: white; }
+        .btn-maps { background-color: #4285F4; color: white; } /* اللون الرسمي لخرائط جوجل الأزرق الاحترافي */
         .btn-email { background-color: #ef4444; color: white; }
         .btn-quote { background-color: var(--primary-blue); color: white; }
         .btn-quote:hover { background-color: var(--secondary-blue); }
@@ -175,8 +175,8 @@
             position: fixed; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
-            background: rgba(15, 23, 42, 0.6); /* خلفية داكنة سينمائية */
-            backdrop-filter: blur(4px); /* تأثير ضبابي زجاجي */
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(4px); 
             justify-content: center; 
             align-items: center; 
             z-index: 1000;
@@ -411,11 +411,12 @@
         </div>
     </section>
 
-    <!-- قسم أزرار التواصل السريع -->
+    <!-- قسم أزرار التواصل السريع (محدث برابط الخريطة) -->
     <section class="actions-section">
         <h2 style="color: var(--primary-blue); margin-bottom: 35px; font-size: 2.2em; font-weight: 700;">يسعدنا تواصلك معنا</h2>
         <a href="https://wa.me/966562664477" target="_blank" class="btn btn-whatsapp">📱 محادثة واتساب</a>
         <a href="tel:0562664477" class="btn btn-call">📞 اتصال مباشر</a>
+        <a href="https://maps.app.goo.gl/4K56WEQy9PYoxEy49?g_st=ic" target="_blank" class="btn btn-maps">📍 موقعنا على الخريطة</a>
         <a href="mailto:wwessamm7@gmail.com" class="btn btn-email">✉️ إرسال بريد إلكتروني</a>
         <button onclick="openQuoteModal()" class="btn btn-quote">📝 طلب عرض سعر</button>
     </section>
