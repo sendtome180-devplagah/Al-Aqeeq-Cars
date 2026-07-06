@@ -168,134 +168,99 @@
         .form-group input, .form-group textarea { 
             width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-family: inherit;
         }
-/* --- تنسيق قسم قالوا عنا وقيمنا --- */
-.testimonials-section {
-    background-color: #f8fbfd; /* خلفية زرقاء ناعمة جداً تكسر بياض الصفحة */
-    padding: 40px 20px;
-    text-align: center;
-    border-top: 1px solid #eef4f8;
-    border-bottom: 1px solid #eef4f8;
-    margin-bottom: 10px; /* تقليل المسافة تحت القسم لرفع جملة تواصل معنا */
-}
 
-.section-title {
-    color: #003366; /* الكحلي الفخم */
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-}
+        /* --- تنسيق قسم قالوا عنا وقيمنا --- */
+        .testimonials-section {
+            background-color: #f8fbfd; 
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #eef4f8;
+            border-bottom: 1px solid #eef4f8;
+            margin-bottom: 10px; 
+        }
 
-.reviews-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto 30px auto;
-}
+        .section-title {
+            color: #003366; 
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
 
-.review-card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    width: 280px;
-    text-align: right;
-    border-right: 4px solid #0056b3; /* خط أزرق جانبي أنيق */
-    transition: transform 0.3s;
-}
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 30px auto;
+        }
 
-.review-card:hover {
-    transform: translateY(-5px);
-}
+        .review-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            width: 280px;
+            text-align: right;
+            border-right: 4px solid #0056b3; 
+            transition: transform 0.3s;
+        }
 
-.review-text {
-    font-style: italic;
-    color: #555;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
-}
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
 
-.review-author {
-    color: #003366;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
+        .review-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
 
-/* نموذج كتابة رأي جديد */
-.add-review-form {
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
+        .review-author {
+            color: #003366;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
 
-.form-group {
-    margin-bottom: 15px;
-}
+        /* نموذج كتابة رأي جديد */
+        .add-review-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
 
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #cccccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-family: inherit;
-}
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
 
-.btn-submit-review {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-}
+        .btn-submit-review {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
 
-.btn-submit-review:hover {
-    background-color: #003366;
-}
+        .btn-submit-review:hover {
+            background-color: #003366;
+        }
 
-/* --- إلغاء الفراغ الكبير فوق وتحت جملة يسعنا تواصلك معنا --- */
-        <!-- قسم قالوا عنا المطور والتفاعلي -->
-<section class="testimonials-section">
-    <h2 class="section-title">قالوا عن معرض العقيق للسيارات ⭐</h2>
-    
-    <!-- الآراء الحالية المكتوبة مسبقاً لتعطي ثقة للموقع -->
-    <div class="reviews-grid" id="reviewsContainer">
-        <div class="review-card">
-            <p class="review-text">"تعامل راقي جداً ومصداقية في فحص السيارات وسرعة في إنهاء الإجراءات. أنصح بالتعامل معهم بشدة."</p>
-            <h4 class="review-author">- أبو أحمد الفاضل</h4>
-        </div>
-        <div class="review-card">
-            <p class="review-text">"ما شاء الله تبارك الله، أسعارهم ممتازة والسيارات نظيفة جداً كأنها جديدة. شكراً لكم على حسن الاستقبال."</p>
-            <h4 class="review-author">- الأستاذ خالد محمد</h4>
-        </div>
-    </div>
-
-    <!-- نموذج تفاعلي حي يتيح للزوار كتابة آرائهم فوراً -->
-    <div class="add-review-form">
-        <h4 style="margin-top:0; color:#003366;">شاركنا رأيك في المعرض</h4>
-        <form id="reviewForm" onsubmit="submitUserReview(event)">
-            <div class="form-group">
-                <input type="text" id="reviewerName" class="form-control" placeholder="اسمك الكريم" required>
-            </div>
-            <div class="form-group">
-                <textarea id="reviewerText" class="form-control" rows="3" placeholder="اكتب تجربتك أو رأيك هنا..." required></textarea>
-            </div>
-            <button type="submit" class="btn-submit-review">إرسال رأيك مجاناً</button>
-        </form>
-    </div>
-</section>
-.contact-section, #contact, footer {
-    margin-top: 5px !important; 
-    padding-top: 10px !important;
-}
-
-        
+        /* --- إلغاء الفراغ الكبير فوق وتحت جملة يسعنا تواصلك معنا --- */
+        .contact-section, #contact, footer {
+            margin-top: 5px !important; 
+            padding-top: 10px !important;
+        }
     </style>
 </head>
 <body>
@@ -365,7 +330,7 @@
                         <span class="badge">جديد</span>
                         <h3>تويوتا كامري GLE 2026</h3>
                         <p>الموديل: 2026 | هجينة (Hybrid)</p>
-                        <p>اللون الأبيض الكلاسيكي النقي مع أعلى معدل توفير للوقود، خيارك الاعتمادي الأمثل يومياً.</p>
+                        <p>اللون الأبيض الكلاسيكي النقي مع أعلى معدل توفير للوقود, خيارك الاعتمادي الأمثل يومياً.</p>
                     </div>
                 </div>
 
@@ -375,6 +340,37 @@
         <!-- نقاط التنقل السفلية -->
         <div class="slider-dots" id="sliderDots"></div>
     </main>
+
+    <!-- قسم قالوا عنا المطور والتفاعلي -->
+    <section class="testimonials-section">
+        <h2 class="section-title">قالوا عن معرض العقيق للسيارات ⭐</h2>
+        
+        <!-- الآراء الحالية المكتوبة مسبقاً لتعطي ثقة للموقع -->
+        <div class="reviews-grid" id="reviewsContainer">
+            <div class="review-card">
+                <p class="review-text">"تعامل راقي جداً ومصداقية في فحص السيارات وسرعة في إنهاء الإجراءات. أنصح بالتعامل معهم بشدة."</p>
+                <h4 class="review-author">- أبو أحمد الفاضل</h4>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"ما شاء الله تبارك الله، أسعارهم ممتازة والسيارات نظيفة جداً كأنها جديدة. شكراً لكم على حسن الاستقبال."</p>
+                <h4 class="review-author">- الأستاذ خالد محمد</h4>
+            </div>
+        </div>
+
+        <!-- نموذج تفاعلي حي يتيح للزوار كتابة آرائهم فوراً -->
+        <div class="add-review-form">
+            <h4 style="margin-top:0; color:#003366;">شاركنا رأيك في المعرض</h4>
+            <form id="reviewForm" onsubmit="submitUserReview(event)">
+                <div class="form-group">
+                    <input type="text" id="reviewerName" class="form-control" placeholder="اسمك الكريم" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="reviewerText" class="form-control" rows="3" placeholder="اكتب تجربتك أو رأيك هنا..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit-review">إرسال رأيك مجاناً</button>
+            </form>
+        </div>
+    </section>
 
     <!-- قسم أزرار التواصل السريع -->
     <section class="actions-section">
@@ -412,7 +408,7 @@
         </div>
     </div>
 
-    <!-- برمجة حركة المستعرض والتفاعل -->
+    <!-- برمجة حركة المستعرض والتفاعل المتكامل -->
     <script>
         const sliderWrapper = document.getElementById('sliderWrapper');
         const carCards = document.querySelectorAll('.car-card');
@@ -462,8 +458,10 @@
 
         window.addEventListener('resize', () => showSlide(currentIndex));
 
+        // تشغيل البداية للمستعرض
         showSlide(currentIndex);
 
+        // وظائف النافذة المنبثقة لطلب السعر
         function openQuoteModal() {
             document.getElementById('quoteModal').style.display = 'flex';
         }
@@ -503,54 +501,31 @@
             const modal = document.getElementById('quoteModal');
             if (event.target == modal) closeQuoteModal();
         }
-        <script>
-function submitUserReview(event) {
-    event.preventDefault(); // منع الصفحة من إعادة التحميل
-    
-    // جلب القيم المكتوبة
-    const name = document.getElementById('reviewerName').value;
-    const text = document.getElementById('reviewerText').value;
-    
-    <script>
-function submitUserReview(event) {
-    event.preventDefault(); // منع إعادة تحميل الصفحة
-    
-    // جلب الحقول بأسمائها الصحيحة
-    var nameField = document.getElementById('reviewerName');
-    var textField = document.getElementById('reviewerText');
-    var container = document.getElementById('reviewsContainer');
-    
-    // التأكد من وجود الحقول في الواجهة أولاً لمنع انهيار السلايدر
-    if (nameField && textField && container) {
-        var name = nameField.value;
-        var text = textField.value;
-        
-        if (name.trim() !== "" && text.trim() !== "") {
-            // إنشاء كرت التقييم الجديد
-            var newCard = document.createElement('div');
-            newCard.className = 'review-card';
-            newCard.innerHTML = '<p class="review-text">"' + text + '"</p><h4 class="review-author">- ' + name + '</h4>';
+
+        // دالة إرسال آراء الزوار الحية والمضمونة
+        function submitUserReview(event) {
+            event.preventDefault();
             
-            // إضافة الكرت للواجهة
-            container.appendChild(newCard);
+            var nameField = document.getElementById('reviewerName');
+            var textField = document.getElementById('reviewerText');
+            var container = document.getElementById('reviewsContainer');
             
-            // إعادة تصفير النموذج
-            document.getElementById('reviewForm').reset();
-            alert('شكراً لك على مشاركة رأيك المتميز معنا!');
+            if (nameField && textField && container) {
+                var name = nameField.value;
+                var text = textField.value;
+                
+                if (name.trim() !== "" && text.trim() !== "") {
+                    var newCard = document.createElement('div');
+                    newCard.className = 'review-card';
+                    newCard.innerHTML = '<p class="review-text">"' + text + '"</p><h4 class="review-author">- ' + name + '</h4>';
+                    
+                    container.appendChild(newCard);
+                    
+                    document.getElementById('reviewForm').reset();
+                    alert('شكراً لك على مشاركة رأيك المتميز معنا!');
+                }
+            }
         }
-    }
-}
-</script>
-</body>
-</html>
-        
-        // إضافة الكرت الجديد إلى القائمة فوراً
-        container.appendChild(newCard);
-        
-        // تفريغ الحقول للكتابة مرة أخرى
-        form.reset();
-        alert('شكراً لك على مشاركة رأيك المتميز معنا!');
-    }
-}
+    </script>
 </body>
 </html>
