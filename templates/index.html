@@ -511,32 +511,38 @@ function submitUserReview(event) {
     const name = document.getElementById('reviewerName').value;
     const text = document.getElementById('reviewerText').value;
     
-    function submitUserReview(event) {
-    event.preventDefault(); // منع الصفحة من إعادة التحميل
+    <script>
+function submitUserReview(event) {
+    event.preventDefault(); // منع إعادة تحميل الصفحة
     
-    // جلب العناصر من الصفحة
-    const nameInput = document.getElementById('reviewerName');
-    const textInput = document.getElementById('reviewerText');
-    const container = document.getElementById('reviewsContainer');
-    const form = document.getElementById('reviewForm');
+    // جلب الحقول بأسمائها الصحيحة
+    var nameField = document.getElementById('reviewerName');
+    var textField = document.getElementById('reviewerText');
+    var container = document.getElementById('reviewsContainer');
     
-    // فحص ذكي: إذا كانت عناصر الـ HTML غير موجودة أو أسمائها مختلفة سيعطيك تنبيهاً فورياً
-    if (!container || !form || !nameInput || !textInput) {
-        alert('تنبيه تقني: كود الـ HTML الخاص بقسم قالوا عنا لم يوضع في المكان الصحيح أو هناك نقص في الأسماء، يرجى مراجعته!');
-        return;
+    // التأكد من وجود الحقول في الواجهة أولاً لمنع انهيار السلايدر
+    if (nameField && textField && container) {
+        var name = nameField.value;
+        var text = textField.value;
+        
+        if (name.trim() !== "" && text.trim() !== "") {
+            // إنشاء كرت التقييم الجديد
+            var newCard = document.createElement('div');
+            newCard.className = 'review-card';
+            newCard.innerHTML = '<p class="review-text">"' + text + '"</p><h4 class="review-author">- ' + name + '</h4>';
+            
+            // إضافة الكرت للواجهة
+            container.appendChild(newCard);
+            
+            // إعادة تصفير النموذج
+            document.getElementById('reviewForm').reset();
+            alert('شكراً لك على مشاركة رأيك المتميز معنا!');
+        }
     }
-    
-    const name = nameInput.value;
-    const text = textInput.value;
-    
-    if (name && text) {
-        // إنشاء كرت مراجعة جديد
-        const newCard = document.createElement('div');
-        newCard.className = 'review-card';
-        newCard.innerHTML = `
-            <p class="review-text">"${text}"</p>
-            <h4 class="review-author">- ${name}</h4>
-        `;
+}
+</script>
+</body>
+</html>
         
         // إضافة الكرت الجديد إلى القائمة فوراً
         container.appendChild(newCard);
