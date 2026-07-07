@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض العقيق للسيارات الجديدة والمستعملة</title>
+    <!-- استدعاء خط Cairo الاحترافي للمواقع الفاخرة -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -91,7 +92,7 @@
             right: 0;
             top: 50px;
             background-color: var(--white);
-            min-width: 160px;
+            min-width: 170px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-radius: var(--radius-md);
             overflow: hidden;
@@ -168,14 +169,14 @@
             max-width: 1240px;
             margin: 30px auto 20px auto; 
             position: relative;
-            padding: 0 60px; /* حشو ممتاز لضمان تموضع الأسهم خارج مسار الكروت */
+            padding: 0 60px; 
             box-sizing: border-box;
         }
 
         .slider-viewport {
             overflow: hidden; 
             width: 100%;
-            direction: ltr; /* بيئة محايدة لضمان استقرار حركة النقل عبر المتصفحات */
+            direction: ltr; 
             padding: 15px 0; 
         }
 
@@ -226,7 +227,7 @@
         .badge { display: inline-block; padding: 6px 14px; background: #e0f0ff; color: var(--primary-blue); border-radius: 6px; font-size: 0.85em; font-weight: 600; margin-bottom: 14px; }
         .car-info p { margin: 8px 0; font-size: 0.95em; color: var(--text-muted); line-height: 1.6; }
 
-        /* تعديل شامل وجذري للأسهم لضمان نقرها وحركتها بكفاءة عالية */
+        /* الأسهم العائمة */
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -246,15 +247,15 @@
             justify-content: center;
             box-shadow: 0 6px 15px rgba(0, 64, 128, 0.3);
             transition: var(--transition-smooth);
-            pointer-events: auto; /* تأكيد استقبال النقرات بالمتصفح */
+            pointer-events: auto; 
         }
         .slider-btn:hover { 
             background-color: var(--secondary-blue); 
             box-shadow: 0 8px 20px rgba(0, 102, 204, 0.4);
             transform: translateY(-50%) scale(1.08);
         }
-        .prev-btn { right: 6px; } /* سهم الرجوع لليمين */
-        .next-btn { left: 6px; }  /* سهم التقدم لليسار */
+        .prev-btn { right: 6px; } 
+        .next-btn { left: 6px; }  
 
         /* نقاط المؤشر السفلي */
         .slider-dots { text-align: center; margin-top: 20px; }
@@ -404,28 +405,34 @@
 </head>
 <body>
 
+    <!-- شريط التنقل العلوي الثابت والمحدث بالقائمة المنسدلة يميناً واضافة زر تعبئة الطلب -->
     <nav class="navbar">
         <div class="dropdown">
             <button class="menu-btn" onclick="toggleDropdown(event)">☰ القائمة</button>
             <div class="dropdown-content" id="navDropdown">
                 <a href="#" onclick="scrollToTop(event)">الرئيسية</a>
                 <a href="#about" onclick="closeDropdown()">من نحن</a>
+                <!-- زر طلب شراء سيارة الجديد المدمج بالنافذة المنبثقة -->
+                <a href="#" onclick="handleMenuQuoteRequest(event)">طلب شراء سيارة</a>
                 <a href="#contact" onclick="closeDropdown()">اتصل بنا</a>
             </div>
         </div>
         <div class="nav-logo">معرض العقيق</div>
     </nav>
 
+    <!-- الجزء العلوي: اسم المعرض -->
     <header>
         <h1>معرض العقيق للسيارات الجديدة والمستعملة</h1>
         <p>التميز والفخامة في اختيار سيارتك القادمة موديل 2026</p>
     </header>
 
+    <!-- قسم من نحن التعريفي الجديد -->
     <section id="about" class="about-section">
         <h2>من نحن</h2>
         <p>مرحباً بكم في معرض العقيق للسيارات، وجهتكم الرائدة والموثوقة في قلب المملكة لامتلاك أحدث وأرقى موديلات السيارات لعام 2026 والسيارات المستعملة بحالة الوكالة. نحن نلتزم بتقديم أعلى مستويات المصداقية، الفحص الفني الدقيق، وتسهيل الإجراءات القانونية والمالية لضمان تجربة شراء استثنائية تليق بامتيازكم.</p>
     </section>
 
+    <!-- مستعرض السيارات بمسارات بايثون Flask وبأزرار مصلحة تماماً -->
     <main class="slider-container">
         <button class="slider-btn prev-btn" id="prevBtn">❯</button> 
         <button class="slider-btn next-btn" id="nextBtn">❮</button> 
@@ -433,6 +440,7 @@
         <div class="slider-viewport">
             <div class="slider-wrapper" id="sliderWrapper">
                 
+                <!-- سيارة 1 -->
                 <div class="car-card">
                     <img src="{{ url_for('static', filename='images/camry.jpg') }}" alt="تويوتا كامري 2026 الرياضية">
                     <div class="car-info">
@@ -443,6 +451,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 2 -->
                 <div class="car-card">
                     <img src="{{ url_for('static', filename='images/mazda.jpg') }}" alt="مازدا 6 2026">
                     <div class="car-info">
@@ -453,6 +462,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 3 -->
                 <div class="car-card">
                     <img src="{{ url_for('static', filename='images/fordtors2026.jpg') }}" alt="فورد توروس 2026">
                     <div class="car-info">
@@ -463,6 +473,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 4 -->
                 <div class="car-card">
                     <img src="{{ url_for('static', filename='images/landcrozer2026.jpg') }}" alt="تويوتا لاندكروزر 2026">
                     <div class="car-info">
@@ -473,6 +484,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 5 -->
                 <div class="car-card">
                     <img src="{{ url_for('static', filename='images/camryy.jpg') }}" alt="تويوتا كامري 2026 بيضاء">
                     <div class="car-info">
@@ -486,9 +498,11 @@
             </div>
         </div>
 
+        <!-- نقاط التنقل السفلية -->
         <div class="slider-dots" id="sliderDots"></div>
     </main>
 
+    <!-- قسم أزرار التواصل السريع -->
     <section id="contact" class="actions-section">
         <h2 style="color: var(--primary-blue); margin-bottom: 25px; font-size: 2em; font-weight: 700;">يسعدنا تواصلك معنا مباشرة</h2>
         <a href="https://wa.me/966562664477" target="_blank" class="btn btn-whatsapp">📱 محادثة واتساب</a>
@@ -498,6 +512,7 @@
         <button onclick="openQuoteModal()" class="btn btn-quote">📝 طلب عرض سعر</button>
     </section>
 
+    <!-- قسم قالوا عنا -->
     <section class="testimonials-section">
         <h2 class="section-title">قالوا عن معرض العقيق للسيارات ⭐</h2>
         
@@ -521,11 +536,12 @@
                 <div class="form-group">
                     <textarea id="reviewerText" class="form-control" rows="3" placeholder="اكتب تجربتك أو رأيك هنا..." required></textarea>
                 </div>
-                <button type="submit" class="btn-submit-review">أرسل رأيك</button>
+                <button type="submit" class="btn-submit-review">إرسال رأيك مجاناً</button>
             </form>
         </div>
     </section>
 
+    <!-- نافذة طلب السعر المنبثقة (نموذج تعبئة الطلب) -->
     <div id="quoteModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeQuoteModal()">×</span>
@@ -552,6 +568,7 @@
         </div>
     </div>
 
+    <!-- برمجة حركة المستعرض والتفاعلات الذكية المصلحة بالكامل -->
     <script>
         const sliderWrapper = document.getElementById('sliderWrapper');
         const carCards = document.querySelectorAll('.car-card');
@@ -578,7 +595,14 @@
             closeDropdown();
         }
 
-        /* نظام ذكي لإغلاق القائمة المنسدلة عند الضغط في وسط الشاشة أو أي مكان فارغ */
+        /* دالة تفعيل طلب شراء سيارة من داخل القائمة المنسدلة */
+        function handleMenuQuoteRequest(event) {
+            event.preventDefault();
+            closeDropdown(); // طي القائمة المنسدلة أولاً
+            openQuoteModal(); // فتح نموذج تعبئة طلب السيارة فوراً
+        }
+
+        /* نظام إغلاق القائمة المنسدلة والنافذة عند الضغط في المساحات الفارغة وسط الشاشة */
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById("navDropdown");
             const menuBtn = document.querySelector(".menu-btn");
@@ -589,7 +613,6 @@
                 }
             }
 
-            // إغلاق النافذة المنبثقة عند الضغط خارجها
             const modal = document.getElementById('quoteModal');
             if (event.target == modal) {
                 closeQuoteModal();
@@ -600,7 +623,6 @@
             return window.innerWidth >= 768 ? 3 : 1;
         }
 
-        /* إصلاح منطق الأسهم التفاعلية وحساب الإزاحة بالشاشات */
         function showSlide(index) {
             const itemsPerView = getItemsPerView();
             const maxIndex = totalCards - itemsPerView;
@@ -631,13 +653,11 @@
             }
         }
 
-        // السهم الأيسر للتقدم للأمام والسهم الأيمن للرجوع للخلف بتناسق حركي تام
         nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
         prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
 
         window.addEventListener('resize', () => showSlide(currentIndex));
 
-        // تشغيل أولي للمستعرض
         showSlide(currentIndex);
 
         function openQuoteModal() {
