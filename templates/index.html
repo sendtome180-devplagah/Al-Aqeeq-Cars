@@ -122,7 +122,7 @@
             color: var(--secondary-blue);
         }
 
-        /* عرض القائمة عند التفعيل التلقائي بالـ JavaScript */
+        /* عرض القائمة عند التفعيل */
         .dropdown-content.show {
             display: block;
         }
@@ -138,7 +138,7 @@
         header h1 { margin: 0; font-size: 2.5em; font-weight: 700; }
         header p { margin-top: 12px; font-size: 1.2em; opacity: 0.85; font-weight: 300; }
 
-        /* --- قسم من نحن المدمج والفاخر --- */
+        /* --- قسم من نحن التعريفي --- */
         .about-section {
             max-width: 900px;
             margin: 40px auto 20px auto;
@@ -163,19 +163,19 @@
             margin: 0;
         }
 
-        /* --- تصميم مستعرض السيارات (تم تحديث الأزرار لتظهر بقوة) --- */
+        /* --- تصميم مستعرض السيارات الهندسي المصلح --- */
         .slider-container {
             max-width: 1240px;
             margin: 30px auto 20px auto; 
             position: relative;
-            padding: 0 50px; /* زيادة الحشو الجانبي لحماية الأزرار من الاختفاء */
+            padding: 0 60px; /* حشو ممتاز لضمان تموضع الأسهم خارج مسار الكروت */
             box-sizing: border-box;
         }
 
         .slider-viewport {
             overflow: hidden; 
             width: 100%;
-            direction: ltr; 
+            direction: ltr; /* بيئة محايدة لضمان استقرار حركة النقل عبر المتصفحات */
             padding: 15px 0; 
         }
 
@@ -220,50 +220,48 @@
             object-fit: cover; 
             transition: var(--transition-smooth);
         }
-        .car-card:hover img {
-            transform: scale(1.03);
-        }
         
         .car-info { padding: 28px; }
         .car-info h3 { margin: 0 0 12px 0; color: var(--primary-blue); font-size: 1.4em; font-weight: 700; }
         .badge { display: inline-block; padding: 6px 14px; background: #e0f0ff; color: var(--primary-blue); border-radius: 6px; font-size: 0.85em; font-weight: 600; margin-bottom: 14px; }
         .car-info p { margin: 8px 0; font-size: 0.95em; color: var(--text-muted); line-height: 1.6; }
 
-        /* تحديث جذري لأزرار الأسهم لضمان ظهورها بشكل عائم وبارز جداً */
+        /* تعديل شامل وجذري للأسهم لضمان نقرها وحركتها بكفاءة عالية */
         .slider-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: var(--primary-blue); /* خلفية داكنة لتبرز بوضوح */
-            color: var(--white); /* سهم أبيض */
+            background-color: var(--primary-blue); 
+            color: var(--white); 
             border: none;
             border-radius: 50%;
-            width: 46px;
-            height: 46px;
-            font-size: 20px;
+            width: 48px;
+            height: 48px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 100; /* رفع الطبقة لأعلى درجة */
+            z-index: 100; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             box-shadow: 0 6px 15px rgba(0, 64, 128, 0.3);
             transition: var(--transition-smooth);
+            pointer-events: auto; /* تأكيد استقبال النقرات بالمتصفح */
         }
         .slider-btn:hover { 
             background-color: var(--secondary-blue); 
             box-shadow: 0 8px 20px rgba(0, 102, 204, 0.4);
             transform: translateY(-50%) scale(1.08);
         }
-        .prev-btn { right: 8px; } /* تثبيت عائم يمين الكروت */
-        .next-btn { left: 8px; }  /* تثبيت عائم يسار الكروت */
+        .prev-btn { right: 6px; } /* سهم الرجوع لليمين */
+        .next-btn { left: 6px; }  /* سهم التقدم لليسار */
 
         /* نقاط المؤشر السفلي */
         .slider-dots { text-align: center; margin-top: 20px; }
         .dot { display: inline-block; width: 8px; height: 8px; background-color: #cbd5e1; border-radius: 50%; margin: 0 6px; cursor: pointer; transition: var(--transition-smooth); }
         .dot.active { background-color: var(--primary-blue); width: 24px; border-radius: 10px; }
 
-        /* قسم التواصل والمساحات المتناسقة والمدمجة مباشرة بعد الوصف */
+        /* قسم التواصل السريع المدمج */
         .actions-section { 
             text-align: center; 
             padding: 40px 20px 50px 20px; 
@@ -327,11 +325,6 @@
             transition: var(--transition-smooth);
         }
 
-        .review-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-        }
-
         .review-text {
             font-style: italic;
             color: #334155;
@@ -367,9 +360,6 @@
             background: #f8fafc;
             transition: var(--transition-smooth);
         }
-        .form-control:focus {
-            outline: none; border-color: var(--secondary-blue); background: var(--white);
-        }
 
         .btn-submit-review {
             background-color: var(--primary-blue);
@@ -381,11 +371,6 @@
             font-weight: 600;
             width: 100%;
             transition: var(--transition-smooth);
-        }
-
-        .btn-submit-review:hover {
-            background-color: #0f172a;
-            transform: translateY(-2px);
         }
 
         /* نافذة طلب السعر المنبثقة الفاخرة */
@@ -409,15 +394,11 @@
             position: relative;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-        .close-btn { position: absolute; top: 20px; left: 25px; cursor: pointer; font-size: 28px; color: var(--text-muted); transition: var(--transition-smooth); }
-        .close-btn:hover { color: var(--text-dark); }
+        .close-btn { position: absolute; top: 20px; left: 25px; cursor: pointer; font-size: 28px; color: var(--text-muted); }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95em; }
         .form-group input, .form-group textarea { 
             width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); box-sizing: border-box; font-family: inherit; transition: var(--transition-smooth); background: #f8fafc;
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--secondary-blue); background: var(--white); box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
         }
     </style>
 </head>
@@ -597,10 +578,29 @@
             closeDropdown();
         }
 
+        /* نظام ذكي لإغلاق القائمة المنسدلة عند الضغط في وسط الشاشة أو أي مكان فارغ */
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById("navDropdown");
+            const menuBtn = document.querySelector(".menu-btn");
+            
+            if (dropdown && dropdown.classList.contains("show")) {
+                if (!dropdown.contains(event.target) && event.target !== menuBtn) {
+                    dropdown.classList.remove("show");
+                }
+            }
+
+            // إغلاق النافذة المنبثقة عند الضغط خارجها
+            const modal = document.getElementById('quoteModal');
+            if (event.target == modal) {
+                closeQuoteModal();
+            }
+        });
+
         function getItemsPerView() {
             return window.innerWidth >= 768 ? 3 : 1;
         }
 
+        /* إصلاح منطق الأسهم التفاعلية وحساب الإزاحة بالشاشات */
         function showSlide(index) {
             const itemsPerView = getItemsPerView();
             const maxIndex = totalCards - itemsPerView;
@@ -631,11 +631,13 @@
             }
         }
 
-        prevBtn.addEventListener('click', () => showSlide(currentIndex + 1));
-        nextBtn.addEventListener('click', () => showSlide(currentIndex - 1));
+        // السهم الأيسر للتقدم للأمام والسهم الأيمن للرجوع للخلف بتناسق حركي تام
+        nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
+        prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
 
         window.addEventListener('resize', () => showSlide(currentIndex));
 
+        // تشغيل أولي للمستعرض
         showSlide(currentIndex);
 
         function openQuoteModal() {
@@ -668,13 +670,6 @@
             } catch (error) {
                 alert('عذراً، حدث خطأ أثناء إرسال الطلب، يرجى المحاولة لاحقاً.');
             }
-        }
-
-        /* إغلاق النوافذ عند النقر خارجها */
-        window.onclick = function(event) {
-            const modal = document.getElementById('quoteModal');
-            if (event.target == modal) closeQuoteModal();
-            if (!event.target.matches('.menu-btn')) closeDropdown();
         }
 
         function submitUserReview(event) {
