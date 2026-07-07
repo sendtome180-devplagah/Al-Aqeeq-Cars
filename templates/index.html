@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض العقيق للسيارات الجديدة والمستعملة</title>
-    <!-- استدعاء خط Cairo الاحترافي للمواقع الفاخرة -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -38,7 +37,7 @@
         }
         
         html {
-            scroll-behavior: smooth; /* تفعيل النزول السلس عند الضغط على الروابط */
+            scroll-behavior: smooth; 
         }
         
         body { 
@@ -49,28 +48,24 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             padding-top: 70px; 
-            /* إضافة سلاسة لتأثيرات الانتقال بين الوضعين */
-            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* دمج السلاسة بجميع العناصر المتأثرة بالوضع الليلي */
         .navbar, .car-card, .about-section, .dropdown-content, .review-card, .add-review-form, .modal-content, .form-control {
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* --- تأثيرات الحركة عند التمرير (Scroll Animations) --- */
-        .fade-in-section {
+        /* --- تأثيرات الحركة الاحترافية عند التمرير (Scroll Animations) --- */
+        .reveal-item {
             opacity: 0;
-            transform: translateY(40px);
-            visibility: hidden;
+            transform: translateY(50px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
 
-        .fade-in-section.is-visible {
+        .reveal-item.is-visible {
             opacity: 1;
             transform: translateY(0);
-            visibility: visible;
         }
 
         /* --- شريط التنقل العلوي الفاخر المميز --- */
@@ -97,17 +92,15 @@
         }
 
         body.dark-mode .nav-logo {
-            color: #38bdf8; /* لون أزرق مضيء يناسب الوضع الداكن */
+            color: #38bdf8; 
         }
 
-        /* حاوية عناصر التحكم يمين الهيدر */
         .nav-controls {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        /* تصميم زر تبديل التصفح الليلي الناعم */
         .theme-toggle-btn {
             background-color: var(--border-color);
             color: var(--text-dark);
@@ -128,7 +121,6 @@
             transform: scale(1.1) rotate(15deg);
         }
 
-        /* تصميم القائمة المنسدلة في أعلى اليمين */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -196,7 +188,6 @@
             display: block;
         }
 
-        /* تصميم الرأس (Header) */
         header { 
             background: linear-gradient(135deg, #002b5c, var(--primary-blue)); 
             color: var(--white); 
@@ -207,7 +198,6 @@
         header h1 { margin: 0; font-size: 2.5em; font-weight: 700; }
         header p { margin-top: 12px; font-size: 1.2em; opacity: 0.85; font-weight: 300; }
 
-        /* --- قسم من نحن التعريفي --- */
         .about-section {
             max-width: 900px;
             margin: 40px auto 20px auto;
@@ -233,7 +223,6 @@
             margin: 0;
         }
 
-        /* --- تصميم مستعرض السيارات الهندسي --- */
         .slider-container {
             max-width: 1240px;
             margin: 30px auto 20px auto; 
@@ -266,12 +255,13 @@
             box-sizing: border-box;
             direction: rtl; 
             margin: 0;
-            transition: var(--transition-smooth);
             border: 1px solid var(--border-color);
+            /* دمج أنميشن الظهور مع أنميشن الـ Hover */
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
         
         .car-card:hover { 
-            transform: translateY(-8px) scale(1.01); 
+            transform: translateY(-8px) scale(1.01) !important; 
             box-shadow: 0 20px 40px rgba(0, 64, 128, 0.1);
             border-color: rgba(0, 102, 204, 0.1);
         }
@@ -288,7 +278,6 @@
             width: 100%; 
             height: 250px; 
             object-fit: cover; 
-            transition: var(--transition-smooth);
         }
         
         .car-info { padding: 28px; }
@@ -298,7 +287,6 @@
         body.dark-mode .badge { background: #1e3a8a; color: #38bdf8; }
         .car-info p { margin: 8px 0; font-size: 0.95em; color: var(--text-muted); line-height: 1.6; }
 
-        /* الأسهم العائمة */
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -328,13 +316,11 @@
         .prev-btn { right: 6px; } 
         .next-btn { left: 6px; }  
 
-        /* نقاط المؤشر السفلي */
         .slider-dots { text-align: center; margin-top: 20px; }
         .dot { display: inline-block; width: 8px; height: 8px; background-color: #cbd5e1; border-radius: 50%; margin: 0 6px; cursor: pointer; transition: var(--transition-smooth); }
         .dot.active { background-color: var(--primary-blue); width: 24px; border-radius: 10px; }
         body.dark-mode .dot.active { background-color: #38bdf8; }
 
-        /* قسم التواصل السريع المدمج */
         .actions-section { 
             text-align: center; 
             padding: 40px 20px 50px 20px; 
@@ -363,7 +349,6 @@
         .btn-quote { background-color: var(--primary-blue); color: white; }
         .btn-quote:hover { background-color: var(--secondary-blue); }
 
-        /* --- تنسيق قسم قالوا عنا الاحترافي --- */
         .testimonials-section {
             background-color: var(--bg-alt); 
             padding: 50px 20px;
@@ -415,7 +400,6 @@
         }
         body.dark-mode .review-author { color: #38bdf8; }
 
-        /* نموذج كتابة رأي جديد ناعم */
         .add-review-form {
             max-width: 520px;
             margin: 0 auto;
@@ -450,7 +434,6 @@
         }
         body.dark-mode .btn-submit-review { background-color: #0266cc; }
 
-        /* نافذة طلب السعر المنبثقة الفاخرة */
         .modal { 
             display: none; 
             position: fixed; 
@@ -483,7 +466,6 @@
 </head>
 <body>
 
-    <!-- شريط التنقل العلوي الثابت والمحدث بأدوات التصفح الليلي والقائمة -->
     <nav class="navbar">
         <div class="nav-controls">
             <div class="dropdown">
@@ -495,34 +477,29 @@
                     <a href="#contact" onclick="closeDropdown()">اتصل بنا</a>
                 </div>
             </div>
-            <!-- زر تبديل التصفح الليلي الفاخر -->
             <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" aria-label="تبديل التصفح الليلي">🌙</button>
         </div>
         <div class="nav-logo">معرض العقيق</div>
     </nav>
 
-    <!-- الجزء العلوي: اسم المعرض -->
     <header>
         <h1>معرض العقيق للسيارات الجديدة والمستعملة</h1>
         <p>التميز والفخامة في اختيار سيارتك القادمة موديل 2026</p>
     </header>
 
-    <!-- قسم من نحن التعريفي (مدمج بحركة تمرير) -->
-    <section id="about" class="about-section fade-in-section">
+    <section id="about" class="about-section reveal-item">
         <h2>من نحن</h2>
         <p>مرحباً بكم في معرض العقيق للسيارات، وجهتكم الرائدة والموثوقة في قلب المملكة لامتلاك أحدث وأرقى موديلات السيارات لعام 2026 والسيارات المستعملة بحالة الوكالة. نحن نلتزم بتقديم أعلى مستويات المصداقية، الفحص الفني الدقيق، وتسهيل الإجراءات القانونية والمالية لضمان تجربة شراء استثنائية تليق بامتيازكم.</p>
     </section>
 
-    <!-- مستعرض السيارات بمسارات بايثون Flask وحركات تمرير كاملة -->
-    <main class="slider-container fade-in-section">
+    <main class="slider-container">
         <button class="slider-btn prev-btn" id="prevBtn">❯</button> 
         <button class="slider-btn next-btn" id="nextBtn">❮</button> 
 
         <div class="slider-viewport">
             <div class="slider-wrapper" id="sliderWrapper">
                 
-                <!-- سيارة 1 -->
-                <div class="car-card">
+                <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/camry.jpg') }}" alt="تويوتا كامري 2026 الرياضية">
                     <div class="car-info">
                         <span class="badge">جديد</span>
@@ -532,8 +509,7 @@
                     </div>
                 </div>
 
-                <!-- سيارة 2 -->
-                <div class="car-card">
+                <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/mazda.jpg') }}" alt="مازدا 6 2026">
                     <div class="car-info">
                         <span class="badge" style="background:#fff3cd; color:#856404;">مستعمل شبه جديد</span>
@@ -543,8 +519,7 @@
                     </div>
                 </div>
 
-                <!-- سيارة 3 -->
-                <div class="car-card">
+                <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/fordtors2026.jpg') }}" alt="فورد توروس 2026">
                     <div class="car-info">
                         <span class="badge">جديد</span>
@@ -554,8 +529,7 @@
                     </div>
                 </div>
 
-                <!-- سيارة 4 -->
-                <div class="car-card">
+                <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/landcrozer2026.jpg') }}" alt="تويوتا لاندكروزر 2026">
                     <div class="car-info">
                         <span class="badge">جديد</span>
@@ -565,8 +539,7 @@
                     </div>
                 </div>
 
-                <!-- سيارة 5 -->
-                <div class="car-card">
+                <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/camryy.jpg') }}" alt="تويوتا كامري 2026 بيضاء">
                     <div class="car-info">
                         <span class="badge">جديد</span>
@@ -582,32 +555,32 @@
         <div class="slider-dots" id="sliderDots"></div>
     </main>
 
-    <!-- قسم أزرار التواصل السريع -->
-    <section id="contact" class="actions-section fade-in-section">
-        <h2 style="color: var(--primary-blue); margin-bottom: 25px; font-size: 2em; font-weight: 700;">يسعدنا تواصلك معنا مباشرة</h2>
-        <a href="https://wa.me/966562664477" target="_blank" class="btn btn-whatsapp">📱 محادثة واتساب</a>
-        <a href="tel:0562664477" class="btn btn-call">📞 اتصال مباشر</a>
-        <a href="https://maps.app.goo.gl/4K56WEQy9PYoxEy49?g_st=ic" target="_blank" class="btn btn-maps">📍 موقعنا على الخريطة</a>
-        <a href="mailto:wwessamm7@gmail.com" class="btn btn-email">✉️ إرسال بريد إلكتروني</a>
-        <button onclick="openQuoteModal()" class="btn btn-quote">📝 طلب عرض سعر</button>
+    <section id="contact" class="actions-section">
+        <h2 class="reveal-item" style="color: var(--primary-blue); margin-bottom: 25px; font-size: 2em; font-weight: 700;">يسعدنا تواصلك معنا مباشرة</h2>
+        <div class="reveal-item">
+            <a href="https://wa.me/966562664477" target="_blank" class="btn btn-whatsapp">📱 محادثة واتساب</a>
+            <a href="tel:0562664477" class="btn btn-call">📞 اتصال مباشر</a>
+            <a href="https://maps.app.goo.gl/4K56WEQy9PYoxEy49?g_st=ic" target="_blank" class="btn btn-maps">📍 موقعنا على الخريطة</a>
+            <a href="mailto:wwessamm7@gmail.com" class="btn btn-email">✉️ إرسال بريد إلكتروني</a>
+            <button onclick="openQuoteModal()" class="btn btn-quote">📝 طلب عرض سعر</button>
+        </div>
     </section>
 
-    <!-- قسم قالوا عنا -->
-    <section class="testimonials-section fade-in-section">
-        <h2 class="section-title">قالوا عن معرض العقيق للسيارات ⭐</h2>
+    <section class="testimonials-section">
+        <h2 class="section-title reveal-item">قالوا عن معرض العقيق للسيارات ⭐</h2>
         
         <div class="reviews-grid" id="reviewsContainer">
-            <div class="review-card">
+            <div class="review-card reveal-item">
                 <p class="review-text">"تعامل راقي جداً ومصداقية في فحص السيارات وسرعة في إنهاء الإجراءات. أنصح بالتعامل معهم بشدة."</p>
                 <h4 class="review-author">- أبو أحمد الفاضل</h4>
             </div>
-            <div class="review-card">
+            <div class="review-card reveal-item">
                 <p class="review-text">"ما شاء الله تبارك الله، أسعارهم ممتازة والسيارات نظيفة جداً كأنها جديدة. شكراً لكم على حسن الاستقبال."</p>
                 <h4 class="review-author">- الأستاذ خالد محمد</h4>
             </div>
         </div>
 
-        <div class="add-review-form">
+        <div class="add-review-form reveal-item">
             <h4 style="margin-top:0; color:var(--text-dark); font-weight:700; margin-bottom: 20px;">شاركنا رأيك في المعرض</h4>
             <form id="reviewForm" onsubmit="submitUserReview(event)">
                 <div class="form-group">
@@ -616,12 +589,11 @@
                 <div class="form-group">
                     <textarea id="reviewerText" class="form-control" rows="3" placeholder="اكتب تجربتك أو رأيك هنا..." required></textarea>
                 </div>
-                <button type="submit" class="btn-submit-review">إرسال رأيك </button>
+                <button type="submit" class="btn-submit-review">إرسال رأيك مجاناً</button>
             </form>
         </div>
     </section>
 
-    <!-- نافذة طلب السعر المنبثقة -->
     <div id="quoteModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeQuoteModal()">×</span>
@@ -648,7 +620,6 @@
         </div>
     </div>
 
-    <!-- برمجة التفاعلات الذكية والتحكم بالحركة والوضع الليلي -->
     <script>
         const sliderWrapper = document.getElementById('sliderWrapper');
         const carCards = document.querySelectorAll('.car-card');
@@ -659,7 +630,7 @@
         let currentIndex = 0;
         const totalCards = carCards.length;
 
-        /* --- نظام التصفح الليلي المتطور وجلب التفضيل المخزن --- */
+        /* --- نظام التصفح الليلي المتطور --- */
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
             document.getElementById('themeToggle').textContent = '☀️';
@@ -668,9 +639,7 @@
         function toggleTheme() {
             const body = document.body;
             const toggleBtn = document.getElementById('themeToggle');
-            
             body.classList.toggle('dark-mode');
-            
             if (body.classList.contains('dark-mode')) {
                 toggleBtn.textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
@@ -680,23 +649,35 @@
             }
         }
 
-        /* --- نظام مراقبة حركة التمرير لإظهار الأقسام بنعومة (IntersectionObserver) --- */
+        /* --- هندسة الحركة المتتابعة الاحترافية عند التمرير (Staggered Scroll Animation) --- */
         const observerOptions = {
-            threshold: 0.12,
-            rootMargin: "0px 0px -40px 0px"
+            threshold: 0.15,
+            rootMargin: "0px 0px -20px 0px"
         };
 
-        const sectionObserver = new IntersectionObserver(function(entries, observer) {
+        const itemObserver = new IntersectionObserver(function(entries, observer) {
+            let delayCounter = 0;
+            let lastTargetParent = null;
+
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // إيقاف المراقبة بعد الظهور لضمان استقرار الأداء
+                    const item = entry.target;
+                    
+                    // إذا كانت العناصر كروت سيارات متجاورة، نقوم بعمل تأخير زمني بسيط بينها لتظهر تلو الأخرى بشكل متتابع
+                    if (item.classList.contains('car-card')) {
+                        item.style.transitionDelay = `${delayCounter * 0.15}s`;
+                        delayCounter++;
+                    }
+                    
+                    item.classList.add('is-visible');
+                    observer.unobserve(item); 
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in-section').forEach(section => {
-            sectionObserver.observe(section);
+        // مراقبة جميع العناصر الفردية المراد تحريكها بدقة
+        document.querySelectorAll('.reveal-item').forEach(item => {
+            itemObserver.observe(item);
         });
 
         /* التحكم بالقائمة المنسدلة */
@@ -721,17 +702,14 @@
             openQuoteModal(); 
         }
 
-        /* إغلاق النوافذ عند النقر خارج نطاقها السعري الفعلي */
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById("navDropdown");
             const menuBtn = document.querySelector(".menu-btn");
-            
             if (dropdown && dropdown.classList.contains("show")) {
                 if (!dropdown.contains(event.target) && event.target !== menuBtn) {
                     dropdown.classList.remove("show");
                 }
             }
-
             const modal = document.getElementById('quoteModal');
             if (event.target == modal) {
                 closeQuoteModal();
@@ -757,7 +735,6 @@
             const stepWidth = 100 / itemsPerView;
             const displacement = currentIndex * stepWidth;
             sliderWrapper.style.transform = `translateX(-${displacement}%)`;
-
             updateDots(maxIndex + 1);
         }
 
@@ -774,9 +751,7 @@
 
         nextBtn.addEventListener('click', () => showSlide(currentIndex + 1));
         prevBtn.addEventListener('click', () => showSlide(currentIndex - 1));
-
         window.addEventListener('resize', () => showSlide(currentIndex));
-
         showSlide(currentIndex);
 
         function openQuoteModal() {
@@ -795,7 +770,6 @@
                 car: document.getElementById('carRequested').value,
                 notes: document.getElementById('clientNotes').value
             };
-
             try {
                 const response = await fetch('/request-quote', {
                     method: 'POST',
@@ -816,11 +790,9 @@
             var nameField = document.getElementById('reviewerName');
             var textField = document.getElementById('reviewerText');
             var container = document.getElementById('reviewsContainer');
-            
             if (nameField && textField && container) {
                 var name = nameField.value;
                 var text = textField.value;
-                
                 if (name.trim() !== "" && text.trim() !== "") {
                     var newCard = document.createElement('div');
                     newCard.className = 'review-card';
