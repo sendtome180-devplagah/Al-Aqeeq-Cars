@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض العقيق للسيارات الجديدة والمستعملة</title>
+    <!-- استدعاء خط Cairo الاحترافي للمواقع الفاخرة -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -51,7 +52,7 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .navbar, .car-card, .about-section, .dropdown-content, .review-card, .add-review-form, .modal-content, .form-control {
+        .navbar, .car-card, .about-section, .dropdown-content, .review-card, .add-review-form, .modal-content, .form-control, .logos-slider {
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
@@ -223,6 +224,77 @@
             margin: 0;
         }
 
+        /* --- هندسة شريط الماركات المعتمدة اللانهائي --- */
+        .logos-slider {
+            overflow: hidden;
+            padding: 25px 0;
+            background: var(--white);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 35px 0;
+            direction: ltr; /* لتوحيد اتجاه حركة شريط الماركات عالمياً */
+            position: relative;
+        }
+
+        /* إضافة تأثير تظليل ناعم على الأطراف لإعطاء عمق بصري للماركات */
+        .logos-slider::before, .logos-slider::after {
+            content: "";
+            height: 100%;
+            position: absolute;
+            width: 150px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .logos-slider::before {
+            top: 0; left: 0;
+            background: linear-gradient(to right, var(--white) 0%, rgba(255,255,255,0) 100%);
+        }
+        .logos-slider::after {
+            top: 0; right: 0;
+            background: linear-gradient(to left, var(--white) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        .logos-slider-track {
+            display: flex;
+            width: calc(220px * 8); /* 4 ماركات مكررة مرتين لضمان استمرار الدوران دون انقطاع */
+            animation: scrollLogos 20s linear infinite;
+        }
+
+        .logos-slider-track:hover {
+            animation-play-state: paused; /* إيقاف مؤقت للحركة عند وضع مؤشر الفأرة */
+        }
+
+        .logo-item {
+            width: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            letter-spacing: 2px;
+            transition: var(--transition-smooth);
+            user-select: none;
+        }
+
+        .logo-item:hover {
+            opacity: 0.95;
+            color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        body.dark-mode .logo-item:hover {
+            color: #38bdf8;
+        }
+
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-220px * 4)); }
+        }
+
+        /* --- مستعرض السيارات الهندسي --- */
         .slider-container {
             max-width: 1240px;
             margin: 30px auto 20px auto; 
@@ -256,7 +328,6 @@
             direction: rtl; 
             margin: 0;
             border: 1px solid var(--border-color);
-            /* دمج أنميشن الظهور مع أنميشن الـ Hover */
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
         
@@ -466,6 +537,7 @@
 </head>
 <body>
 
+    <!-- شريط التنقل العلوي -->
     <nav class="navbar">
         <div class="nav-controls">
             <div class="dropdown">
@@ -482,16 +554,34 @@
         <div class="nav-logo">معرض العقيق</div>
     </nav>
 
+    <!-- الجزء العلوي -->
     <header>
         <h1>معرض العقيق للسيارات الجديدة والمستعملة</h1>
         <p>التميز والفخامة في اختيار سيارتك القادمة موديل 2026</p>
     </header>
 
+    <!-- من نحن -->
     <section id="about" class="about-section reveal-item">
         <h2>من نحن</h2>
         <p>مرحباً بكم في معرض العقيق للسيارات، وجهتكم الرائدة والموثوقة في قلب المملكة لامتلاك أحدث وأرقى موديلات السيارات لعام 2026 والسيارات المستعملة بحالة الوكالة. نحن نلتزم بتقديم أعلى مستويات المصداقية، الفحص الفني الدقيق، وتسهيل الإجراءات القانونية والمالية لضمان تجربة شراء استثنائية تليق بامتيازكم.</p>
     </section>
 
+    <!-- شريط الماركات المعتمدة اللانهائي والمتحرك -->
+    <div class="logos-slider reveal-item">
+        <div class="logos-slider-track">
+            <div class="logo-item">TOYOTA</div>
+            <div class="logo-item">MAZDA</div>
+            <div class="logo-item">FORD</div>
+            <div class="logo-item">HYUNDAI</div>
+            <!-- تكرار الماركات برمجياً لخلق حلقة دوران دائرية غير منقطعة -->
+            <div class="logo-item">TOYOTA</div>
+            <div class="logo-item">MAZDA</div>
+            <div class="logo-item">FORD</div>
+            <div class="logo-item">HYUNDAI</div>
+        </div>
+    </div>
+
+    <!-- مستعرض السيارات -->
     <main class="slider-container">
         <button class="slider-btn prev-btn" id="prevBtn">❯</button> 
         <button class="slider-btn next-btn" id="nextBtn">❮</button> 
@@ -499,6 +589,7 @@
         <div class="slider-viewport">
             <div class="slider-wrapper" id="sliderWrapper">
                 
+                <!-- سيارة 1 -->
                 <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/camry.jpg') }}" alt="تويوتا كامري 2026 الرياضية">
                     <div class="car-info">
@@ -509,6 +600,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 2 -->
                 <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/mazda.jpg') }}" alt="مازدا 6 2026">
                     <div class="car-info">
@@ -519,6 +611,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 3 -->
                 <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/fordtors2026.jpg') }}" alt="فورد توروس 2026">
                     <div class="car-info">
@@ -529,6 +622,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 4 -->
                 <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/landcrozer2026.jpg') }}" alt="تويوتا لاندكروزر 2026">
                     <div class="car-info">
@@ -539,6 +633,7 @@
                     </div>
                 </div>
 
+                <!-- سيارة 5 -->
                 <div class="car-card reveal-item">
                     <img src="{{ url_for('static', filename='images/camryy.jpg') }}" alt="تويوتا كامري 2026 بيضاء">
                     <div class="car-info">
@@ -555,6 +650,7 @@
         <div class="slider-dots" id="sliderDots"></div>
     </main>
 
+    <!-- قسم التواصل السريع -->
     <section id="contact" class="actions-section">
         <h2 class="reveal-item" style="color: var(--primary-blue); margin-bottom: 25px; font-size: 2em; font-weight: 700;">يسعدنا تواصلك معنا مباشرة</h2>
         <div class="reveal-item">
@@ -566,6 +662,7 @@
         </div>
     </section>
 
+    <!-- قسم قالوا عنا -->
     <section class="testimonials-section">
         <h2 class="section-title reveal-item">قالوا عن معرض العقيق للسيارات ⭐</h2>
         
@@ -594,6 +691,7 @@
         </div>
     </section>
 
+    <!-- نافذة طلب السعر -->
     <div id="quoteModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeQuoteModal()">×</span>
@@ -657,13 +755,11 @@
 
         const itemObserver = new IntersectionObserver(function(entries, observer) {
             let delayCounter = 0;
-            let lastTargetParent = null;
 
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const item = entry.target;
                     
-                    // إذا كانت العناصر كروت سيارات متجاورة، نقوم بعمل تأخير زمني بسيط بينها لتظهر تلو الأخرى بشكل متتابع
                     if (item.classList.contains('car-card')) {
                         item.style.transitionDelay = `${delayCounter * 0.15}s`;
                         delayCounter++;
@@ -675,7 +771,6 @@
             });
         }, observerOptions);
 
-        // مراقبة جميع العناصر الفردية المراد تحريكها بدقة
         document.querySelectorAll('.reveal-item').forEach(item => {
             itemObserver.observe(item);
         });
