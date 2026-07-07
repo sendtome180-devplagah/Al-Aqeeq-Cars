@@ -154,7 +154,7 @@
             right: 0;
             top: 50px;
             background-color: var(--white);
-            min-width: 170px;
+            min-width: 190px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             border-radius: var(--radius-md);
             overflow: hidden;
@@ -232,11 +232,10 @@
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             margin: 35px 0;
-            direction: ltr; /* لتوحيد اتجاه حركة شريط الماركات عالمياً */
+            direction: ltr; 
             position: relative;
         }
 
-        /* إضافة تأثير تظليل ناعم على الأطراف لإعطاء عمق بصري للماركات */
         .logos-slider::before, .logos-slider::after {
             content: "";
             height: 100%;
@@ -256,12 +255,12 @@
 
         .logos-slider-track {
             display: flex;
-            width: calc(220px * 8); /* 4 ماركات مكررة مرتين لضمان استمرار الدوران دون انقطاع */
+            width: calc(220px * 8); 
             animation: scrollLogos 20s linear infinite;
         }
 
         .logos-slider-track:hover {
-            animation-play-state: paused; /* إيقاف مؤقت للحركة عند وضع مؤشر الفأرة */
+            animation-play-state: paused; 
         }
 
         .logo-item {
@@ -515,6 +514,8 @@
             justify-content: center; 
             align-items: center; 
             z-index: 1000;
+            overflow-y: auto; /* لضمان ظهور شريط التمرير إذا كان حجم الشاشة صغيراً والمحتوى طويلاً */
+            padding: 20px 0;
         }
         .modal-content { 
             background: var(--white); 
@@ -526,12 +527,18 @@
             position: relative;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             border: 1px solid var(--border-color);
+            margin: auto;
         }
         .close-btn { position: absolute; top: 20px; left: 25px; cursor: pointer; font-size: 28px; color: var(--text-muted); }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95em; }
         .form-group input, .form-group textarea { 
             width: 100%; padding: 14px; border: 1px solid var(--border-color); border-radius: var(--radius-md); box-sizing: border-box; font-family: inherit; transition: var(--transition-smooth); background: var(--light-bg); color: var(--text-dark);
+        }
+        .form-group input[type="file"] {
+            background: transparent;
+            padding: 8px 0;
+            border: none;
         }
     </style>
 </head>
@@ -546,6 +553,7 @@
                     <a href="#" onclick="scrollToTop(event)">الرئيسية</a>
                     <a href="#about" onclick="closeDropdown()">من نحن</a>
                     <a href="#" onclick="handleMenuQuoteRequest(event)">طلب شراء سيارة</a>
+                    <a href="#" onclick="handleMenuSellCarRequest(event)">عرض سيارة للبيع</a> <!-- الزر الجديد المضاف -->
                     <a href="#contact" onclick="closeDropdown()">اتصل بنا</a>
                 </div>
             </div>
@@ -573,7 +581,6 @@
             <div class="logo-item">MAZDA</div>
             <div class="logo-item">FORD</div>
             <div class="logo-item">HYUNDAI</div>
-            <!-- تكرار الماركات برمجياً لخلق حلقة دوران دائرية غير منقطعة -->
             <div class="logo-item">TOYOTA</div>
             <div class="logo-item">MAZDA</div>
             <div class="logo-item">FORD</div>
@@ -691,7 +698,7 @@
         </div>
     </section>
 
-    <!-- نافذة طلب السعر -->
+    <!-- نافذة طلب السعر (الشراء) -->
     <div id="quoteModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeQuoteModal()">×</span>
@@ -714,6 +721,39 @@
                     <textarea id="clientNotes" rows="3" placeholder="حدد طريقة الشراء (كاش أو أقساط) أو أي مواصفات خاصة"></textarea>
                 </div>
                 <button type="submit" class="btn btn-quote" style="width: 100%; margin: 15px 0 0 0; padding: 14px;">إرسال طلب السعر</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة عرض سيارة للبيع الفاخرة (الجديدة) -->
+    <div id="sellCarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeSellCarModal()">×</span>
+            <h2 style="color: var(--primary-blue); margin-top: 0; font-weight: 700; margin-bottom: 25px;">عرض سيارة للبيع</h2>
+            <form id="sellCarForm" onsubmit="submitSellCarForm(event)" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="sellerName">الاسم الكريم:</label>
+                    <input type="text" id="sellerName" required placeholder="أدخل اسمك الكامل">
+                </div>
+                <div class="form-group">
+                    <label for="sellerPhone">رقم الجوال:</label>
+                    <input type="tel" id="sellerPhone" required placeholder="05XXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="carDetails">تفاصيل السيارة المعروضة:</label>
+                    <input type="text" id="carDetails" required placeholder="الماركة، الموديل، الممشى.. (مثال: مازدا 6 2024)">
+                </div>
+                <div class="form-group">
+                    <label for="expectedPrice">السعر المطلوب (ريال):</label>
+                    <input type="number" id="expectedPrice" required placeholder="أدخل حدك أو السعر المتوقع لبيعها">
+                </div>
+                <div class="form-group">
+                    <label for="carImages">إرفاق صور السيارة للبيع:</label>
+                    <!-- استخدام خاصية multiple للسماح للمستخدم بتحديد عدة صور دفعة واحدة -->
+                    <input type="file" id="carImages" accept="image/*" multiple required class="form-control">
+                    <small style="color: var(--text-muted); display: block; margin-top: 6px; font-size: 0.8rem;">يمكنك اختيار صورة واحدة أو مجموعة صور معاً من جهازك.</small>
+                </div>
+                <button type="submit" class="btn btn-quote" style="width: 100%; margin: 15px 0 0 0; padding: 14px; background-color: #0284c7;">إرسال تفاصيل وصور السيارة</button>
             </form>
         </div>
     </div>
@@ -747,7 +787,7 @@
             }
         }
 
-        /* --- هندسة الحركة المتتابعة الاحترافية عند التمرير (Staggered Scroll Animation) --- */
+        /* --- هندسة الحركة المتتابعة الاحترافية عند التمرير --- */
         const observerOptions = {
             threshold: 0.15,
             rootMargin: "0px 0px -20px 0px"
@@ -755,16 +795,13 @@
 
         const itemObserver = new IntersectionObserver(function(entries, observer) {
             let delayCounter = 0;
-
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const item = entry.target;
-                    
                     if (item.classList.contains('car-card')) {
                         item.style.transitionDelay = `${delayCounter * 0.15}s`;
                         delayCounter++;
                     }
-                    
                     item.classList.add('is-visible');
                     observer.unobserve(item); 
                 }
@@ -797,6 +834,31 @@
             openQuoteModal(); 
         }
 
+        /* التعامل مع خيار القائمة الجديد */
+        function handleMenuSellCarRequest(event) {
+            event.preventDefault();
+            closeDropdown();
+            openSellCarModal();
+        }
+
+        /* دوال النوافذ المنبثقة (Modals) */
+        function openQuoteModal() {
+            document.getElementById('quoteModal').style.display = 'flex';
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').style.display = 'none';
+        }
+
+        function openSellCarModal() {
+            document.getElementById('sellCarModal').style.display = 'flex';
+        }
+
+        function closeSellCarModal() {
+            document.getElementById('sellCarModal').style.display = 'none';
+        }
+
+        /* الاستماع للضغط خارج النوافذ لإغلاقها تلقائياً */
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById("navDropdown");
             const menuBtn = document.querySelector(".menu-btn");
@@ -805,9 +867,12 @@
                     dropdown.classList.remove("show");
                 }
             }
-            const modal = document.getElementById('quoteModal');
-            if (event.target == modal) {
+            
+            if (event.target == document.getElementById('quoteModal')) {
                 closeQuoteModal();
+            }
+            if (event.target == document.getElementById('sellCarModal')) {
+                closeSellCarModal();
             }
         });
 
@@ -849,14 +914,7 @@
         window.addEventListener('resize', () => showSlide(currentIndex));
         showSlide(currentIndex);
 
-        function openQuoteModal() {
-            document.getElementById('quoteModal').style.display = 'flex';
-        }
-
-        function closeQuoteModal() {
-            document.getElementById('quoteModal').style.display = 'none';
-        }
-
+        /* معالجة نموذج طلب الشراء (القديم) */
         async function submitQuoteForm(event) {
             event.preventDefault();
             const formData = {
@@ -877,6 +935,38 @@
                 document.getElementById('quoteForm').reset();
             } catch (error) {
                 alert('عذراً، حدث خطأ أثناء إرسال الطلب، يرجى المحاولة لاحقاً.');
+            }
+        }
+
+        /* معالجة نموذج عرض سيارة للبيع الجديد مع دعم إرفاق الصور الفيروسي (Multipart Form Data) */
+        async function submitSellCarForm(event) {
+            event.preventDefault();
+            
+            // استخدام FormData بدلاً من كائن الـ JSON العادي لأنها تحتوي على ملفات وصور مرفقة
+            const formData = new FormData();
+            formData.append('seller_name', document.getElementById('sellerName').value);
+            formData.append('seller_phone', document.getElementById('sellerPhone').value);
+            formData.append('car_details', document.getElementById('carDetails').value);
+            formData.append('expected_price', document.getElementById('expectedPrice').value);
+            
+            // جلب ملفات الصور المحددة وإضافتها متتابعة برمجياً
+            const fileInput = document.getElementById('carImages');
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append('car_photos', fileInput.files[i]);
+            }
+
+            try {
+                // إرسال البيانات فوراً إلى خادم Flask على المسار المخصص لاستقبال طلبات البيع
+                const response = await fetch('/submit-sell-car', {
+                    method: 'POST',
+                    body: formData // يتم إرسال كائن الـ FormData مباشرة بدون تحديد Content-Type (المتصفح يحدده تلقائياً)
+                });
+                const result = await response.json();
+                alert(result.message);
+                closeSellCarModal();
+                document.getElementById('sellCarForm').reset();
+            } catch (error) {
+                alert('عذراً، حدث خطأ أثناء إرسال تفاصيل وصور السيارة، يرجى المحاولة لاحقاً أو التواصل معنا واتساب.');
             }
         }
 
