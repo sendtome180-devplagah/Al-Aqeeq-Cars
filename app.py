@@ -21,7 +21,7 @@ SENDER_EMAIL = "your_email@gmail.com"
 SENDER_PASSWORD = "xxxx xxxx xxxx xxxx"  
 
 # 3. البريد الذي سيقوم بـ (الاستقبال) - بريدك الحالي للمتابعة والطلب
-RECEIVER_EMAIL = "almatrafi12@gmail.com"  
+RECEIVER_EMAIL = "wwessamm7@gmail.com"  
 # ----------------------------------------------------------
 
 def send_showroom_email(subject, body_text, files=None):
