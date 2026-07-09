@@ -15,7 +15,7 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
 # 1. البريد الذي سيقوم بـ (الإرسال) - ضع بريد جي ميل الخاص بك هنا
-SENDER_EMAIL = "your_email@gmail.com"  
+SENDER_EMAIL = "almatrafi12@gmail.com"  
 
 # 2. كلمة مرور التطبيقات (App Password) وليس كلمة مرور حسابك العادية
 SENDER_PASSWORD = "knxb hfbt egph gaqc"  
