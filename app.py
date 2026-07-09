@@ -18,7 +18,7 @@ SMTP_PORT = 587
 SENDER_EMAIL = "your_email@gmail.com"  
 
 # 2. كلمة مرور التطبيقات (App Password) وليس كلمة مرور حسابك العادية
-SENDER_PASSWORD = "xxxx xxxx xxxx xxxx"  
+SENDER_PASSWORD = "knxb hfbt egph gaqc"  
 
 # 3. البريد الذي سيقوم بـ (الاستقبال) - بريدك الحالي للمتابعة والطلب
 RECEIVER_EMAIL = "almatrafi12@gmail.com"  
