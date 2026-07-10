@@ -14,69 +14,77 @@ app = Flask(__name__)
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-# قراءة البيانات من متغيرات البيئة في Render
+# قراءة البيانات السرية من متغيرات البيئة في لوحة تحكم Render لحمايتها
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
 SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
 RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
 
 
 def send_showroom_email(subject, body_text, files=None):
-"""إرسال البريد الإلكتروني مع إمكانية إرفاق ملفات"""
+    """إرسال البريد الإلكتروني مع إمكانية إرفاق ملفات بصيغة صحيحة وآمنة"""
+    
+    # تحقق أمني سريع: للتأكد من أن البيانات تم إدخالها في Render بنجاح
+    if not SENDER_EMAIL or not SENDER_PASSWORD or not RECEIVER_EMAIL:
+        print("خطأ برمي: متغيرات البيئة (الإيميل أو كلمة مرور التطبيقات) غير معرفة في لوحة تحكم Render!")
+        return False
 
-try:
-msg = MIMEMultipart()
-msg["From"] = SENDER_EMAIL
-msg["To"] = RECEIVER_EMAIL
-msg["Subject"] = subject
+    try:
+        msg = MIMEMultipart()
+        msg["From"] = SENDER_EMAIL
+        msg["To"] = RECEIVER_EMAIL
+        msg["Subject"] = subject
 
-msg.attach(MIMEText(body_text, "plain", "utf-8"))
+        # ترميز UTF-8 لضمان ظهور النصوص العربية بشكل سليم تماماً
+        msg.attach(MIMEText(body_text, "plain", "utf-8"))
 
-if files:
-for file in files:
-if file.filename == "":
-continue
+        if files:
+            for file in files:
+                if not file or file.filename == "":
+                    continue
 
-part = MIMEBase("application", "octet-stream")
-part.set_payload(file.read())
-encoders.encode_base64(part)
-part.add_header(
-"Content-Disposition",
-f'attachment; filename="{file.filename}"'
-)
-msg.attach(part)
-file.seek(0)
+                part = MIMEBase("application", "octet-stream")
+                part.set_payload(file.read())
+                encoders.encode_base64(part)
+                
+                # استخدام صياغة تدعم أسماء الملفات العربية بشكل سليم ومستقر
+                part.add_header(
+                    "Content-Disposition",
+                    "attachment",
+                    filename=file.filename
+                )
+                msg.attach(part)
+                file.seek(0)
 
-server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-server.starttls()
-server.login(SENDER_EMAIL, SENDER_PASSWORD)
-server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
-server.quit()
+        # الاتصال بخادم جوجل الآمن وإرسال الرسالة
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(SENDER_EMAIL, SENDER_PASSWORD)
+        server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
+        server.quit()
 
-return True
+        return True
 
-except Exception as e:
-print("خطأ أثناء إرسال البريد:", e)
-return False
+    except Exception as e:
+        print("خطأ أثناء إرسال البريد الإلكتروني:", e)
+        return False
 
 
 @app.route("/")
 def index():
-return render_template("index.html")
+    return render_template("index.html")
 
 
-# استقبال طلب شراء سيارة
+# استقبال طلب شراء سيارة (عرض سعر)
 @app.route("/submit_quote", methods=["POST"])
 def submit_quote():
+    client_name = request.form.get("client_name")
+    client_phone = request.form.get("client_phone")
+    car_requested = request.form.get("car_requested")
+    client_notes = request.form.get("client_notes")
 
-client_name = request.form.get("client_name")
-client_phone = request.form.get("client_phone")
-car_requested = request.form.get("car_requested")
-client_notes = request.form.get("client_notes")
+    subject = f"طلب شراء جديد: {car_requested}"
 
-subject = f"طلب شراء جديد: {car_requested}"
-
-body = f"""
-تم استلام طلب شراء سيارة جديد
+    body = f"""تم استلام طلب شراء سيارة جديد
 
 اسم العميل:
 {client_name}
@@ -87,37 +95,36 @@ body = f"""
 السيارة المطلوبة:
 {car_requested}
 
-ملاحظات:
+ملاحظات العميل:
 {client_notes}
 """
 
-if send_showroom_email(subject, body):
-return jsonify({
-"status": "success",
-"message": "تم إرسال الطلب بنجاح"
-})
+    if send_showroom_email(subject, body):
+        return jsonify({
+            "status": "success",
+            "message": "تم إرسال الطلب بنجاح"
+        })
 
-return jsonify({
-"status": "error",
-"message": "فشل إرسال البريد، تحقق من الإعدادات"
-})
+    return jsonify({
+        "status": "error",
+        "message": "فشل إرسال البريد، يرجى مراجعة إعدادات السيرفر"
+    })
 
 
-# استقبال طلب بيع سيارة
+# استقبال طلب بيع سيارة مع الصور
 @app.route("/submit_sell_car", methods=["POST"])
 def submit_sell_car():
+    seller_name = request.form.get("seller_name")
+    seller_phone = request.form.get("seller_phone")
+    car_details = request.form.get("car_details")
+    expected_price = request.form.get("expected_price")
 
-seller_name = request.form.get("seller_name")
-seller_phone = request.form.get("seller_phone")
-car_details = request.form.get("car_details")
-expected_price = request.form.get("expected_price")
+    # استقبال الصور المرفوعة من العميل
+    uploaded_files = request.files.getlist("car_images")
 
-uploaded_files = request.files.getlist("car_images")
+    subject = f"عرض سيارة للبيع: {car_details}"
 
-subject = f"عرض سيارة للبيع: {car_details}"
-
-body = f"""
-تم استلام عرض سيارة للبيع
+    body = f"""تم استلام عرض سيارة جديد للبيع عبر الموقع
 
 اسم البائع:
 {seller_name}
@@ -132,17 +139,17 @@ body = f"""
 {expected_price} ريال سعودي
 """
 
-if send_showroom_email(subject, body, uploaded_files):
-return jsonify({
-"status": "success",
-"message": "تم إرسال البيانات والصور بنجاح"
-})
+    if send_showroom_email(subject, body, uploaded_files):
+        return jsonify({
+            "status": "success",
+            "message": "تم إرسال البيانات والصور بنجاح"
+        })
 
-return jsonify({
-"status": "error",
-"message": "فشل إرسال البريد"
-})
+    return jsonify({
+        "status": "error",
+        "message": "فشل إرسال البريد الإلكتروني والصور"
+    })
 
 
 if __name__ == "__main__":
-app.run(debug=True)
+    app.run(debug=True)
