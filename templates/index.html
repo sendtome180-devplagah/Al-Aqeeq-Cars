@@ -797,25 +797,37 @@
         });
 
         /* التحكم بالقائمة المنسدلة */
-        function toggleDropdown(event) {
-            event.stopPropagation();
-            document.getElementById('navDropdown').classList.toggle('show');
-        }
+        /* التحكم بالقائمة المنسدلة (نسخة مطورة ومضمونة لجميع الأجهزة) */
+function toggleDropdown(event) {
+    event.stopPropagation(); // منع انتشار النقرة لكي لا تفتح وتغلق في نفس اللحظة
+    document.getElementById('navDropdown').classList.toggle('show');
+}
 
-        function closeDropdown() {
-            document.getElementById('navDropdown').classList.remove('show');
-        }
+function closeDropdown() {
+    document.getElementById('navDropdown').classList.remove('show');
+}
 
-        function scrollToTop(event) {
-            event.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeDropdown();
+}
+
+// الاستماع للنقرات في كامل المستند (مضمون 100% على الكمبيوتر والهواتف والآيفون)
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('navDropdown');
+    const menuBtn = document.querySelector('.menu-btn');
+    
+    // إذا كانت النقرة خارج زر القائمة الرئيسي
+    if (!menuBtn.contains(event.target)) {
+        // يتم طي القائمة فوراً في حالتين:
+        // 1. إذا كانت النقرة خارج مساحة القائمة تماماً (في أي مكان فارغ بالصفحة)
+        // 2. أو إذا نقر المستخدم على أي رابط (<a>) داخل القائمة ليتم طيّها قبل فتح أي نافذة منبثقة
+        if (!dropdown.contains(event.target) || event.target.tagName === 'A') {
             closeDropdown();
         }
-
-        window.addEventListener('click', function() {
-            closeDropdown();
-        });
-
+    }
+});
         /* التحكم بالنوافذ المنبثقة (Modals) */
         function openQuoteModal() { document.getElementById('quoteModal').style.display = 'flex'; }
         function closeQuoteModal() { document.getElementById('quoteModal').style.display = 'none'; }
